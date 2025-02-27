@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>March Mania Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            width: 600px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .result h3 {
+            color: #388e3c;
+        }
+
+        .result p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .result strong {
+            color: #388e3c;
+        }
+
+        .result .win-probability {
+            font-size: 20px;
+            font-weight: bold;
+            color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>March Mania Prediction</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="team1">Select Team 1</label>
+                <select class="form-control" id="team1" name="team1">
+                    {% for team in all_teams %}
+                    <option value="{{ team }}" {% if team == team1 %}selected{% endif %}>Team {{ team }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="team2">Select Team 2</label>
+                <select class="form-control" id="team2" name="team2">
+                    {% for team in all_teams %}
+                    <option value="{{ team }}" {% if team == team2 %}selected{% endif %}>Team {{ team }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Predict</button>
+        </form>
+
+        {% if predicted_winner %}
+        <div class="result">
+            <h3>Prediction Result</h3>
+            <p><strong>Predicted Winner: </strong>Team {{ predicted_winner }}</p>
+            <p><strong>Predicted Loser: </strong>Team {{ predicted_loser }}</p>
+            <p><strong>Winning Score: </strong>{{ winning_score }}</p>
+            <p><strong>Losing Score: </strong>{{ losing_score }}</p>
+            <p class="win-probability"><strong>Win Probability: </strong>{{ prediction_percentage }}%</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
